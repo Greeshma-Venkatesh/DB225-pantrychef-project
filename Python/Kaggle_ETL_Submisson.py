@@ -12,7 +12,7 @@ import json
 recipeData         = []
 ingredientData     = []
 recipeStepsData    = []
-break_ct           = 100000
+break_ct           = 10000
 def oracleConnection():
     try:
         conn = cx_Oracle.connect('****/****')
