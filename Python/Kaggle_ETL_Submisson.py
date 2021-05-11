@@ -1,3 +1,9 @@
+#   Property of SJSU Data225 Project Group3
+#   Verision    Date            Author              Desc
+#       1       04/27/2021      Rishi Srivastava    Initial Version
+#       2       04/30/2021      Payal               Added function to load Stats data
+#       3       05/05/2021      Greeshma,Jyoti      Peer Review
+#   Below Program does a full pull of Recipe data from four differnet sources and load into Oracle Recipe Data Mart
 import csv
 import cx_Oracle
 import io
@@ -8,22 +14,14 @@ ingredientData     = []
 recipeStepsData    = []
 break_ct           = 100000
 def oracleConnection():
-    import csv
-    import cx_Oracle
-    import io
-    import time
     try:
         conn = cx_Oracle.connect('****/****')
-        #cur = conn.cursor()
         print("Connection established")
         return conn
     except Exception as e:
         print("Exception occurrred")
         
 def loadData(data,s):
-    import csv
-    import io
-    import time
     try:
         sql = s
         conn = oracleConnection()
@@ -81,15 +79,12 @@ def processKaggleData():
                     temprecipeData.append(titleId)
                 elif col == 'categories':
                     temprecipeData.append(None)
-                #elif col == 'desc':
-                #    temprecipeData.append(row[col].replace("x92",''))
                 else:
                     temprecipeData.append(row[col])
             
             recipeData.append(temprecipeData)
             for key,val in row.items():
                 if key == 'directions':
-                    #tempRecipeSteps = []
                     for count, value in enumerate(val,1):
                         tempRecipeSteps = []
                         #print(count, value)
@@ -295,7 +290,7 @@ def main():
     global ingredientData   
     global recipeStepsData
     try:
-        processKaggleData()
+        processKaggleData()         #function to process Kaggle data
         recipeSql = "insert into PANTRYDB.RECIPE(TITLE_ID,TITLE,CREATED_DATE,CATEGORIES,CALORIES,DESCRIPTION,PROTEIN,RATING,SODIUM) VALUES (:1,:2,:3,:4,:5,:6,:7,:8,:9)"
         loadData(recipeData,recipeSql)
         ingredientSql = "insert into PANTRYDB.RECIPE_INGREDIENTS(TITLE_ID,INGREDIENT_ID,INGREDIENT_NAME) VALUES (:1,:2,:3)"
@@ -307,12 +302,10 @@ def main():
         ingredientData  = []
         recipeStepsData = []        
         
-        processAllrecipesData()
-        processEpicuriousData()
-        processFoodnetworkData()
-        #len(recipeData)
-        #len(ingredientData)
-        #len(recipeStepsData)
+        processAllrecipesData()         #function call to process AllRecipe data
+        processEpicuriousData()         #function call to process EPICurious data
+        processFoodnetworkData()        #function call to process Food Network data
+        
         recipeSql = "insert into PANTRYDB.RECIPE(TITLE_ID,TITLE) VALUES (:1,:2)"
         loadData(recipeData,recipeSql)
         ingredientSql = "insert into PANTRYDB.RECIPE_INGREDIENTS(TITLE_ID,INGREDIENT_ID,INGREDIENT_NAME) VALUES (:1,:2,:3)"
