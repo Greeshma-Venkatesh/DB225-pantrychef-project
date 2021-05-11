@@ -12,7 +12,7 @@ import json
 recipeData         = []
 ingredientData     = []
 recipeStepsData    = []
-break_ct           = 10000
+#break_ct           = 100000
 def oracleConnection():
     try:
         conn = cx_Oracle.connect('****/****')
@@ -72,7 +72,6 @@ def processKaggleData():
             ct+=1
             #print(row)
             temprecipeData = []
-            #print(row)
             for col in recipeHeader:
                 if col == 'title_id':
                     titleId = "KAGGLE-"+str(title_id)
@@ -102,8 +101,8 @@ def processKaggleData():
                         tempIngredients.append(value)
                         ingredientData.append(tempIngredients)
             title_id+=1
-            if ct == break_ct:
-                break
+            #if ct == break_ct:
+            #    break
         f.close()
     except Exception as e:
         print("Exception Occurred:",str(e))
@@ -148,8 +147,8 @@ def processAllrecipesData():
                         recipeStepsData.append(tempRecipeSteps)
             recipeData.append(temprecipeData)
             ct+=1
-            if ct == break_ct:
-                break
+            #if ct == break_ct:
+            #    break
         f.close()
     except Exception as e:
         print("Exception Occurred:",str(e))
@@ -194,8 +193,8 @@ def processEpicuriousData():
                         recipeStepsData.append(tempRecipeSteps)
             recipeData.append(temprecipeData)
             ct+=1
-            if ct == break_ct:
-                break
+            #if ct == break_ct:
+            #    break
         f.close()
     except Exception as e:
         print("Exception Occurred:",str(e))
@@ -240,8 +239,8 @@ def processFoodnetworkData():
                         recipeStepsData.append(tempRecipeSteps)
             recipeData.append(temprecipeData)
             ct+=1
-            if ct == break_ct:
-                break
+            #if ct == break_ct:
+            #    break
         f.close()
     except Exception as e:
         print("Exception Occurred:",str(e))
