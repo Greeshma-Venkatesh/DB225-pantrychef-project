@@ -3,7 +3,7 @@
 #       1       04/27/2021      Rishi Srivastava    Initial Version
 #       2       04/30/2021      Payal               Added function to load Stats data
 #       3       05/05/2021      Greeshma,Jyoti      Peer Review
-#   Below Program does a full pull of Recipe data from four differnet sources and load into Oracle Recipe Data Mart
+#   Below Program does a full pull of Recipe data from four different sources and load into Oracle Recipe Data Mart
 import csv
 import cx_Oracle
 import io
@@ -98,7 +98,7 @@ def processKaggleData():
                         #print(count, value)
                         tempIngredients.append(titleId)
                         tempIngredients.append(count)    
-                        tempIngredients.append(value)
+                        tempIngredients.append(value.replace("ADVERTISEMENT",""))
                         ingredientData.append(tempIngredients)
             title_id+=1
             #if ct == break_ct:
