@@ -1,5 +1,5 @@
 #   Property of SJSU Data225 Project Group3
-#   Verision    Date            Author              Desc
+#   Version    Date            Author              Desc
 #       1       04/27/2021      Rishi Srivastava    Initial Version
 #       2       04/30/2021      Payal               Added function to load Stats data
 #       3       05/05/2021      Greeshma,Jyoti      Peer Review
